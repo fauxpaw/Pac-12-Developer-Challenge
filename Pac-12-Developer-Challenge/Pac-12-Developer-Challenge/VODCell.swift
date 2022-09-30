@@ -11,8 +11,20 @@ class VODCell: UICollectionViewCell {
     @IBOutlet weak private var schoolsLabel: UILabel!
     @IBOutlet weak private var sportsLabel: UILabel!
     
-    func configureView() {
-        contentView.backgroundColor = .cyan
+    func configureView(with vod: Vod, sportsLib: SportsLibrary, schoolsLib: SchoolsLibrary) {
+        titleLabel.text = vod.title
+        if let schoolNames = vod.schools?.compactMap({ vodSchool in
+            return vodSchool.getName(lib: schoolsLib)
+        }) {
+            schoolsLabel.text = schoolNames.joined(separator: ", ")
+        }
+        
+        if let sportsNames = vod.sports?.compactMap({ vodSport in
+            return vodSport.getName(lib: sportsLib)
+        }) {
+            sportsLabel.text = sportsNames.joined(separator: ", ")
+        }
+        imageView.loadFrom(url: vod.images.small)
         contentView.layer.cornerRadius = cardCornerRadius
         styleTimeLabel()
     }
@@ -23,11 +35,24 @@ class VODCell: UICollectionViewCell {
         durationLabel.layer.cornerRadius = labelCornerRadius
     }
     
-    private func styleSchoolsLabel() {
+    private func styleSchoolsLabel(lib: SchoolsLibrary) {
         
     }
     
-    private func styleSportsLabel() {
+    private func styleSportsLabel(lib: SportsLibrary) {
         
+    }
+}
+
+extension UIImageView {
+        
+    func loadFrom(url: URL) {
+        DispatchQueue.main.async { [weak self] in
+            if let imageData = try? Data(contentsOf: url) {
+                if let loadedImage = UIImage(data: imageData) {
+                        self?.image = loadedImage
+                }
+            }
+        }
     }
 }
