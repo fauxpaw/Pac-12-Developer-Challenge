@@ -10,47 +10,59 @@ class VODCell: UICollectionViewCell {
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var schoolsLabel: UILabel!
     @IBOutlet weak private var sportsLabel: UILabel!
-    
-    func configureView(with vod: Vod, sportsLib: SportsLibrary, schoolsLib: SchoolsLibrary) {
-        titleLabel.text = vod.title
-        if let schoolNames = vod.schools?.compactMap({ vodSchool in
-            return vodSchool.getName(lib: schoolsLib)
-        }) {
-            schoolsLabel.text = schoolNames.joined(separator: ", ")
-        }
         
-        if let sportsNames = vod.sports?.compactMap({ vodSport in
-            return vodSport.getName(lib: sportsLib)
-        }) {
-            sportsLabel.text = sportsNames.joined(separator: ", ")
-        }
-        imageView.loadFrom(url: vod.images.small)
+    func configureView(with vod: Vod, sportsLib: SportsLibrary, schoolsLib: SchoolsLibrary) {
+        
         contentView.layer.cornerRadius = cardCornerRadius
         styleTimeLabel()
+        loadImage(url: vod.images.small)
+        titleLabel.text = vod.title
+        if let schools = vod.schools {
+            configureSchoolsLabel(schools: schools, schoolsLib: schoolsLib)
+        }
+        
+        if let sports = vod.sports {
+            configureSportsLabel(sports: sports, sportsLib: sportsLib)
+        }
+        configureDurationLabel(length: vod.duration)
+    }
+    
+    private func configureDurationLabel(length: Double) {
+        let duration: TimeInterval = length / 60 // conversion to seconds
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [ .minute, .second ]
+        formatter.zeroFormattingBehavior = [ .pad ]
+
+        let formattedDuration = formatter.string(from: duration)
+        durationLabel.text = formattedDuration
+    }
+    
+    private func configureSportsLabel(sports: [VodSport], sportsLib: SportsLibrary) {
+        let names = sports.map { vodSport in
+            return vodSport.getName(lib: sportsLib)
+        }
+        sportsLabel.text = names.joined(separator: ", ")
+    }
+    
+    private func configureSchoolsLabel(schools: [VodSchool], schoolsLib: SchoolsLibrary) {
+        let names = schools.map { vodSchool in
+            return vodSchool.getName(lib: schoolsLib)
+        }
+        schoolsLabel.text = names.joined(separator: ", ")
     }
 
     private func styleTimeLabel() {
-        durationLabel.text = " 0:\(Int.random(in: 10...59)) "
         durationLabel.layer.masksToBounds = true
         durationLabel.layer.cornerRadius = labelCornerRadius
     }
     
-    private func styleSchoolsLabel(lib: SchoolsLibrary) {
-        
-    }
-    
-    private func styleSportsLabel(lib: SportsLibrary) {
-        
-    }
-}
-
-extension UIImageView {
-        
-    func loadFrom(url: URL) {
-        DispatchQueue.main.async { [weak self] in
-            if let imageData = try? Data(contentsOf: url) {
-                if let loadedImage = UIImage(data: imageData) {
-                        self?.image = loadedImage
+    // this is embarrassing - I ran out of time but this should be async fetches for the images as well as a caching mechanism to prevent redundant calls
+    private func loadImage(url: URL) {
+        if let imageData = try? Data(contentsOf: url) {
+            if let loadedImage = UIImage(data: imageData) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.imageView.image = loadedImage
                 }
             }
         }

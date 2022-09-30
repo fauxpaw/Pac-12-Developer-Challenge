@@ -35,6 +35,7 @@ struct VodImagesList: Codable {
 
 struct Vod: Codable {
     
+    let id: String
     let schools: [VodSchool]?
     let sports: [VodSport]?
     let duration: Double
