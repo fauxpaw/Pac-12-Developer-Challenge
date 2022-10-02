@@ -56,11 +56,16 @@ class VODCell: UICollectionViewCell {
         durationLabel.layer.masksToBounds = true
         durationLabel.layer.cornerRadius = labelCornerRadius
     }
-    
-    // would be best practice to cache these images
+
     private func loadImage(url: URL) {
+        
+        if let cachedImage = imageCache.object(forKey: URLKey(url: url)) {
+            self.imageView.image = cachedImage
+        }
+        
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
+            
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -68,9 +73,13 @@ class VODCell: UICollectionViewCell {
             
             if let data = data { // should have some default image as a graceful fallback
                 DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: data)
+                    if let image = UIImage(data: data) {
+                        imageCache.setObject(image, forKey: URLKey(url: url))
+                        self.imageView.image = image
+                    }
                 }
             }
         }.resume()
     }
 }
+

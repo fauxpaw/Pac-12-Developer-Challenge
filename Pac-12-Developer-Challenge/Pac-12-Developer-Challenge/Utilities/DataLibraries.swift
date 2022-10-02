@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+protocol AppModelLibrary {
+    func name(id: Int) -> String
+}
+
 struct SchoolsLibrary: AppModelLibrary {
     private let schools: [School]
     

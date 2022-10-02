@@ -3,7 +3,6 @@ import UIKit
 
 private let reuseIdentifier = "VodCard"
 
-
 // I had hoped to get the prefetching up and running for this view so that I could also meet the bonus requirement but would need more time for that
 
 class CustomDataSource: NSObject, UICollectionViewDataSource,  UICollectionViewDataSourcePrefetching {

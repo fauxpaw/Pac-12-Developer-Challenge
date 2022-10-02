@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C70137F28E9B9190023953E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C70137E28E9B9190023953E /* ImageCache.swift */; };
 		4C7A712628E25A7100015E31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A712528E25A7100015E31 /* AppDelegate.swift */; };
 		4C7A712828E25A7100015E31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A712728E25A7100015E31 /* SceneDelegate.swift */; };
 		4C7A712D28E25A7200015E31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C7A712B28E25A7200015E31 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C70137E28E9B9190023953E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		4C7A712228E25A7100015E31 /* Pac-12-Developer-Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pac-12-Developer-Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7A712528E25A7100015E31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C7A712728E25A7100015E31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C70138028E9B9470023953E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4CAFD88E28E51545004DDD73 /* API.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4C70138128E9BA010023953E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4CAFD88828E511F7004DDD73 /* Vod.swift */,
+				4CAFD89228E67DAE004DDD73 /* School.swift */,
+				4CAFD89428E6886B004DDD73 /* Sport.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4C70138228E9BA6F0023953E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4CAFD89028E67AD7004DDD73 /* DataLibraries.swift */,
+				4C70137E28E9B9190023953E /* ImageCache.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4C70138328E9BA8F0023953E /* AppGlobal */ = {
+			isa = PBXGroup;
+			children = (
+				4C7A712528E25A7100015E31 /* AppDelegate.swift */,
+				4C7A712728E25A7100015E31 /* SceneDelegate.swift */,
+				4C7A712B28E25A7200015E31 /* Main.storyboard */,
+				4C7A712E28E25A7200015E31 /* Assets.xcassets */,
+				4C7A713028E25A7200015E31 /* LaunchScreen.storyboard */,
+			);
+			path = AppGlobal;
+			sourceTree = "<group>";
+		};
+		4C70138428E9BB1E0023953E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				4C7A715528E25B6F00015E31 /* CollectionViewController.swift */,
+				4CAFD89828E79DCB004DDD73 /* CustomDataSource.swift */,
+				4C7A715728E2601A00015E31 /* VODCell.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		4C7A711928E25A7100015E31 = {
 			isa = PBXGroup;
 			children = (
@@ -113,20 +164,12 @@
 		4C7A712428E25A7100015E31 /* Pac-12-Developer-Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				4C7A712528E25A7100015E31 /* AppDelegate.swift */,
-				4C7A712728E25A7100015E31 /* SceneDelegate.swift */,
-				4C7A715528E25B6F00015E31 /* CollectionViewController.swift */,
-				4CAFD89828E79DCB004DDD73 /* CustomDataSource.swift */,
-				4CAFD89028E67AD7004DDD73 /* DataLibraries.swift */,
-				4C7A712B28E25A7200015E31 /* Main.storyboard */,
-				4C7A715728E2601A00015E31 /* VODCell.swift */,
-				4CAFD88828E511F7004DDD73 /* Vod.swift */,
-				4CAFD88E28E51545004DDD73 /* API.swift */,
-				4CAFD89228E67DAE004DDD73 /* School.swift */,
-				4CAFD89428E6886B004DDD73 /* Sport.swift */,
-				4C7A712E28E25A7200015E31 /* Assets.xcassets */,
-				4C7A713028E25A7200015E31 /* LaunchScreen.storyboard */,
 				4C7A713328E25A7200015E31 /* Info.plist */,
+				4C70138328E9BA8F0023953E /* AppGlobal */,
+				4C70138428E9BB1E0023953E /* Features */,
+				4C70138128E9BA010023953E /* Models */,
+				4C70138028E9B9470023953E /* Networking */,
+				4C70138228E9BA6F0023953E /* Utilities */,
 			);
 			path = "Pac-12-Developer-Challenge";
 			sourceTree = "<group>";
@@ -279,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C70137F28E9B9190023953E /* ImageCache.swift in Sources */,
 				4CAFD89528E6886B004DDD73 /* Sport.swift in Sources */,
 				4C7A715628E25B6F00015E31 /* CollectionViewController.swift in Sources */,
 				4CAFD89128E67AD7004DDD73 /* DataLibraries.swift in Sources */,

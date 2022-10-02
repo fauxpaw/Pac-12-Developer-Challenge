@@ -1,9 +1,5 @@
 import Foundation
 
-protocol AppModelLibrary {
-    func name(id: Int) -> String
-}
-
 protocol IdNameRepresentable {
     func getName(lib: AppModelLibrary) -> String
 }
