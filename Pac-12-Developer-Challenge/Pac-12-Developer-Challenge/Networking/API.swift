@@ -68,10 +68,10 @@ class API {
     
     // MARK: Vods
     
-    func getVods(completion: @escaping (Result<VodList, Error>) -> Void) {
+    func getVods(route: String = "https://api.pac-12.com/v3/vod", completion: @escaping (Result<VodList, Error>) -> Void) {
         
         dataTask?.cancel()
-        let urlComponents = URLComponents(string: "https://api.pac-12.com/v3/vod")
+        let urlComponents = URLComponents(string: route)
         guard let url = urlComponents?.url else { return }
         let defaultSession = URLSession(configuration: .default)
         dataTask = defaultSession.dataTask(with: url, completionHandler: {[weak self] data, response, error in

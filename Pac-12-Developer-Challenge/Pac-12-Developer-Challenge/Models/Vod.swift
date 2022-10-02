@@ -22,7 +22,7 @@ struct VodSport: Codable, IdNameRepresentable {
 
 struct VodList: Codable {
     let programs: [Vod]
-    let nextPage: URL
+    let nextPage: String
 }
 
 struct VodImagesList: Codable {
